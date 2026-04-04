@@ -48,6 +48,7 @@ export default function Footer() {
       links: [
         { id: 6, title: 'ALL MODULES', url: '/modules' },
         { id: 7, title: 'ABOUT', url: '/about' },
+        { id: 8, title: 'STUDY MATERIALS', url: '/study-materials' },
       ],
     },
   ];

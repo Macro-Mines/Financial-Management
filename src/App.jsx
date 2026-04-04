@@ -8,6 +8,7 @@ import CostOfCapitalPage from './pages/cost-of-capital/CostOfCapitalPage';
 import LeveragePage from './pages/leverage/LeveragePage';
 import CapitalStructurePage from './pages/capital-structure/CapitalStructurePage';
 import CapitalBudgetingPage from './pages/capital-budgeting/CapitalBudgetingPage';
+import StudyMaterials from './pages/StudyMaterials';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/modules/leverage" element={<LeveragePage />} />
           <Route path="/modules/capital-structure" element={<CapitalStructurePage />} />
           <Route path="/modules/capital-budgeting" element={<CapitalBudgetingPage />} />
+          <Route path="/study-materials" element={<StudyMaterials />} />
         </Route>
       </Routes>
     </Router>
