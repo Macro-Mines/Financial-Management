@@ -56,17 +56,6 @@ export default function About() {
             </div>
           </div>
 
-          <div className="glass-card p-8">
-            <h2 className="text-xl font-[var(--font-heading)] text-sand-200 mb-4 tracking-wide">Tech Stack</h2>
-            <div className="flex flex-wrap gap-3">
-              {['React.js', 'Tailwind CSS', 'Framer Motion', 'Chart.js', 'React Router'].map((tech) => (
-                <span key={tech} className="px-4 py-2 rounded-lg border border-sand-800/20 text-sm text-sand-300 bg-dune-800/30">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
           <div className="text-center py-8">
             <div className="inline-flex flex-col items-center">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center text-dune-900 text-2xl font-bold font-[var(--font-heading)] mb-4">
