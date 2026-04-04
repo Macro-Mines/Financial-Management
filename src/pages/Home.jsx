@@ -42,8 +42,8 @@ const TiltCard = ({ children, to }) => {
       onMouseLeave={handleMouseLeave}
       className="perspective-1000"
     >
-      <Link 
-        to={to} 
+      <Link
+        to={to}
         style={{ transform: "translateZ(30px)" }}
         className="block bg-surface-container-low p-12 border border-white/5 flex flex-col justify-between min-h-[400px] hover:bg-surface-container-high hover:-translate-y-2 hover:shadow-[0_10px_40px_-5px_rgba(253,186,116,0.15)] transition-all duration-300 group"
       >
@@ -57,7 +57,7 @@ export default function Home() {
   const { scrollY } = useScroll();
   const yBg = useTransform(scrollY, [0, 1000], [0, 200]); // Slower parallax for background monolith
   const yStagger = useTransform(scrollY, [0, 1000], [0, 100]); // Mild parallax for hero text layer
-  
+
   // Mouse follow parallax for depth feeling
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -92,9 +92,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center px-10 md:px-16 lg:px-24 pt-40 pb-32 overflow-hidden">
         <div className="grid grid-cols-12 w-full gap-12 items-center relative z-10">
-          
+
           {/* Hero Text */}
-          <motion.div 
+          <motion.div
             className="col-span-12 lg:col-span-9 xl:col-span-8"
             variants={containerVars}
             initial="hidden"
@@ -102,7 +102,7 @@ export default function Home() {
             style={{ y: yStagger }}
           >
             <motion.div variants={itemVars} className="mb-10">
-              <span className="font-label text-m tracking-[0.4em] text-primary uppercase">FINANCIAL MANAGEMENT</span>
+              <span className="font-label text-sm tracking-[0.4em] text-primary uppercase">FINANCIAL MANAGEMENT</span>
             </motion.div>
             <h1 className="font-headline text-6xl md:text-8xl lg:text-9xl leading-[0.9] text-on-surface letter-spacing-cinematic mb-16 overflow-hidden flex flex-col">
               <motion.span variants={itemVars} className="block pb-2">CONTROL CAPITAL.</motion.span>
@@ -123,7 +123,7 @@ export default function Home() {
           </motion.div>
 
           {/* Technical Offset Label */}
-          <motion.div 
+          <motion.div
             className="hidden lg:block lg:col-span-3 xl:col-span-4 mt-auto"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -139,7 +139,7 @@ export default function Home() {
         </div>
 
         {/* Absolute Visual Element: The Monolith Fragment with Parallax and Scale */}
-        <motion.div 
+        <motion.div
           className="absolute right-0 bottom-0 w-2/5 h-4/5 bg-surface-container-low z-[-1] translate-x-12 translate-y-12 overflow-hidden border-l border-t border-white/5"
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1.0, opacity: 0.6 }}
@@ -157,7 +157,7 @@ export default function Home() {
 
       {/* Curriculum Grid Section */}
       <section className="px-10 md:px-16 lg:px-24 py-40 bg-stone-950 border-t border-white/5">
-        <motion.div 
+        <motion.div
           className="mb-24"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -174,7 +174,7 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
           whileInView="show"
@@ -304,7 +304,7 @@ export default function Home() {
 
       {/* Functional Areas of Financial Management */}
       <section className="py-50 bg-stone-950 border-t border-white/5 relative overflow-hidden flex flex-col items-center justify-center">
-        <motion.div 
+        <motion.div
           className="z-10 mb-20 text-center px-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -320,7 +320,7 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="w-full relative flex h-[600px] max-w-4xl flex-col items-center justify-center space-y-6 px-4"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -379,7 +379,7 @@ export default function Home() {
           <FloatingPaths position={-1} />
         </div>
 
-        <motion.div 
+        <motion.div
           className="relative z-10 max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
