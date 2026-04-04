@@ -10,13 +10,13 @@ export default function About() {
         className="max-w-3xl mx-auto"
       >
         <p className="text-gold/60 text-xs uppercase tracking-[0.4em] mb-4 font-[var(--font-heading)]">About</p>
-        <h1 className="section-title text-3xl md:text-4xl mb-8">About FinanceHub</h1>
+        <h1 className="section-title text-3xl md:text-4xl mb-8">About Finagement</h1>
 
         <div className="space-y-8 text-dune-300 leading-relaxed">
           <div className="glass-card p-8">
             <h2 className="text-xl font-[var(--font-heading)] text-sand-200 mb-4 tracking-wide">The Vision</h2>
             <p>
-              FinanceHub is a comprehensive Financial Management Learning Platform designed to bridge the gap between theoretical financial concepts and practical application. Built with interactive tools, visual learning, and real-world problem solving at its core.
+              Finagement is a comprehensive Financial Management Learning Platform designed to bridge the gap between theoretical financial concepts and practical application. Built with interactive tools, visual learning, and real-world problem solving at its core.
             </p>
           </div>
 

@@ -5,23 +5,110 @@ import {
   Search, Landmark, LineChart, Scale, PieChart, Target, Building,
   ClipboardCheck, Calculator, Briefcase, Coins, Handshake, Receipt
 } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import React, { useEffect } from 'react';
+
+const TiltCard = ({ children, to }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    x.set(mouseX / width - 0.5);
+    y.set(mouseY / height - 0.5);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 40 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+      }}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="perspective-1000"
+    >
+      <Link 
+        to={to} 
+        style={{ transform: "translateZ(30px)" }}
+        className="block bg-surface-container-low p-12 border border-white/5 flex flex-col justify-between min-h-[400px] hover:bg-surface-container-high hover:-translate-y-2 hover:shadow-[0_10px_40px_-5px_rgba(253,186,116,0.15)] transition-all duration-300 group"
+      >
+        {children}
+      </Link>
+    </motion.div>
+  );
+};
 
 export default function Home() {
+  const { scrollY } = useScroll();
+  const yBg = useTransform(scrollY, [0, 1000], [0, 200]); // Slower parallax for background monolith
+  const yStagger = useTransform(scrollY, [0, 1000], [0, 100]); // Mild parallax for hero text layer
+  
+  // Mouse follow parallax for depth feeling
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const parallaxX = useSpring(useTransform(mouseX, [0, typeof window !== "undefined" ? window.innerWidth : 1000], [-15, 15]), { stiffness: 50, damping: 20 });
+  const parallaxY = useSpring(useTransform(mouseY, [0, typeof window !== "undefined" ? window.innerHeight : 1000], [-15, 15]), { stiffness: 50, damping: 20 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  // Framer Stagger Variants
+  const containerVars = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+    }
+  };
+
+  const itemVars = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
+  };
+
   return (
     <main className="relative z-10 flex-grow flex flex-col">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center px-10 md:px-16 lg:px-24 pt-40 pb-32 overflow-hidden">
         <div className="grid grid-cols-12 w-full gap-12 items-center relative z-10">
+          
           {/* Hero Text */}
-          <div className="col-span-12 lg:col-span-9 xl:col-span-8">
-            <div className="mb-10">
+          <motion.div 
+            className="col-span-12 lg:col-span-9 xl:col-span-8"
+            variants={containerVars}
+            initial="hidden"
+            animate="show"
+            style={{ y: yStagger }}
+          >
+            <motion.div variants={itemVars} className="mb-10">
               <span className="font-label text-m tracking-[0.4em] text-primary uppercase">FINANCIAL MANAGEMENT</span>
-            </div>
-            <h1 className="font-headline text-6xl md:text-8xl lg:text-9xl leading-[0.9] text-on-surface letter-spacing-cinematic mb-16">
-              CONTROL CAPITAL.<br />
-              <span className="italic text-primary-container">SHAPE THE FUTURE.</span>
+            </motion.div>
+            <h1 className="font-headline text-6xl md:text-8xl lg:text-9xl leading-[0.9] text-on-surface letter-spacing-cinematic mb-16 overflow-hidden flex flex-col">
+              <motion.span variants={itemVars} className="block pb-2">CONTROL CAPITAL.</motion.span>
+              <motion.span variants={itemVars} className="italic text-primary-container block">SHAPE THE FUTURE.</motion.span>
             </h1>
-            <div className="flex flex-col sm:flex-row items-start gap-6 sm:gap-10">
+            <motion.div variants={itemVars} className="flex flex-col sm:flex-row items-start gap-6 sm:gap-10">
               <Link to="/modules/tvm" className="w-[280px] sm:w-[300px] block">
                 <button className="w-full bg-primary text-on-primary py-5 sm:py-6 px-8 sm:px-0 text-left sm:text-center font-label font-bold text-sm tracking-[0.2em] hover:bg-primary-container transition-all duration-500 rounded-none uppercase">
                   START LEARNING
@@ -32,33 +119,51 @@ export default function Home() {
                   EXPLORE MODULES
                 </button>
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Technical Offset Label */}
-          <div className="hidden lg:block lg:col-span-3 xl:col-span-4 mt-auto">
+          <motion.div 
+            className="hidden lg:block lg:col-span-3 xl:col-span-4 mt-auto"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8, duration: 1 }}
+          >
             <div className="text-right max-w-[280px] ml-auto">
               <div className="mb-6 h-px w-32 bg-outline-variant/30 ml-auto"></div>
               <p className="font-label text-[10px] tracking-widest text-outline leading-loose uppercase">
                 LEARN FINANCIAL MANAGEMENT THROUGH INTERACTIVE TOOLS, REAL-WORLD INSIGHTS, AND POWERFUL VISUAL LEARNING.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Absolute Visual Element: The Monolith Fragment */}
-        <div className="absolute right-0 bottom-0 w-2/5 h-4/5 bg-surface-container-low opacity-60 z-[-1] translate-x-12 translate-y-12 overflow-hidden border-l border-t border-white/5">
-          <img
-            className="w-full h-full object-cover mix-blend-luminosity opacity-40 scale-110 hover:scale-100 transition-transform duration-[2000ms]"
+        {/* Absolute Visual Element: The Monolith Fragment with Parallax and Scale */}
+        <motion.div 
+          className="absolute right-0 bottom-0 w-2/5 h-4/5 bg-surface-container-low z-[-1] translate-x-12 translate-y-12 overflow-hidden border-l border-t border-white/5"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1.0, opacity: 0.6 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          style={{ y: yBg }}
+        >
+          <motion.img
+            style={{ x: parallaxX, y: parallaxY }}
+            className="w-[110%] h-[110%] -ml-[5%] -mt-[5%] object-cover mix-blend-luminosity opacity-40"
             alt="dramatic architectural concrete monolith structure in a vast desert landscape with sharp shadows and golden hour lighting"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVKbIwbgK9_66TY2SEji1uEbJeVMrEhOV0VPF6ae5ci84wBY_5ZD_yhfoctXC2C99Pe9k3fIDU4ZG6LhsqRMSIgJkZva1EPbdYBQg9tOMeoNY1Z9Jfcz4GeAher-AqWwAKS7hsLLwXi6dC0tC1REZPKHYoEKN1VCJbp_89pNOPl88CNRhEzwrfGp8aHIgCp2mf7BbGgEvtnOjB70RgaAQHN5coM3ZTt-VK8U-1VOsiKIhLCRQCCKdjWlsAuDtjI3mv81EacFjJKIW_"
           />
-        </div>
+        </motion.div>
       </section>
 
       {/* Curriculum Grid Section */}
       <section className="px-10 md:px-16 lg:px-24 py-40 bg-stone-950 border-t border-white/5">
-        <div className="mb-24">
+        <motion.div 
+          className="mb-24"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-12 bg-primary/40"></div>
             <span className="font-label text-xs tracking-[0.4em] text-primary uppercase">Curriculum</span>
@@ -67,11 +172,23 @@ export default function Home() {
           <p className="font-body text-outline max-w-2xl text-lg leading-relaxed">
             Five comprehensive modules designed to take you from fundamentals to advanced financial decision-making, delivered through a brutalist architectural lens.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: { staggerChildren: 0.15 }
+            }
+          }}
+        >
           {/* 01 Time Value of Money */}
-          <Link to="/modules/tvm" className="bg-surface-container-low p-12 border border-white/5 flex flex-col justify-between min-h-[400px] hover:bg-surface-container-high transition-all duration-500 group">
+          <TiltCard to="/modules/tvm">
             <div>
               <div className="flex justify-between items-start mb-12">
                 <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">hourglass_empty</span>
@@ -87,10 +204,10 @@ export default function Home() {
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Future Value</span>
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Annuities</span>
             </div>
-          </Link>
+          </TiltCard>
 
           {/* 02 Cost of Capital */}
-          <Link to="/modules/cost-of-capital" className="bg-surface-container-low p-12 border border-white/5 flex flex-col justify-between min-h-[400px] hover:bg-surface-container-high transition-all duration-500 group">
+          <TiltCard to="/modules/cost-of-capital">
             <div>
               <div className="flex justify-between items-start mb-12">
                 <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">monetization_on</span>
@@ -106,10 +223,10 @@ export default function Home() {
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Cost of Equity</span>
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">WACC</span>
             </div>
-          </Link>
+          </TiltCard>
 
           {/* 03 Leverage */}
-          <Link to="/modules/leverage" className="bg-surface-container-low p-12 border border-white/5 flex flex-col justify-between min-h-[400px] hover:bg-surface-container-high transition-all duration-500 group">
+          <TiltCard to="/modules/leverage">
             <div>
               <div className="flex justify-between items-start mb-12">
                 <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">balance</span>
@@ -124,10 +241,10 @@ export default function Home() {
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Operating Leverage</span>
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Financial Leverage</span>
             </div>
-          </Link>
+          </TiltCard>
 
           {/* 04 Capital Structure */}
-          <Link to="/modules/capital-structure" className="bg-surface-container-low p-12 border border-white/5 flex flex-col justify-between min-h-[400px] hover:bg-surface-container-high transition-all duration-500 group">
+          <TiltCard to="/modules/capital-structure">
             <div>
               <div className="flex justify-between items-start mb-12">
                 <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">account_tree</span>
@@ -143,10 +260,10 @@ export default function Home() {
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">NOI Approach</span>
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">MM Theory</span>
             </div>
-          </Link>
+          </TiltCard>
 
           {/* 05 Capital Budgeting */}
-          <Link to="/modules/capital-budgeting" className="bg-surface-container-low p-12 border border-white/5 flex flex-col justify-between min-h-[400px] hover:bg-surface-container-high transition-all duration-500 group">
+          <TiltCard to="/modules/capital-budgeting">
             <div>
               <div className="flex justify-between items-start mb-12">
                 <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">assessment</span>
@@ -162,10 +279,10 @@ export default function Home() {
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">IRR</span>
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Profitability Index</span>
             </div>
-          </Link>
+          </TiltCard>
 
           {/* 06 Upcoming Module */}
-          <Link to="/modules/upcoming" className="bg-surface-container-low p-12 border border-white/5 flex flex-col justify-between min-h-[400px] hover:bg-surface-container-high transition-all duration-500 group">
+          <TiltCard to="/modules/upcoming">
             <div>
               <div className="flex justify-between items-start mb-12">
                 <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">add_chart</span>
@@ -181,13 +298,19 @@ export default function Home() {
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">.</span>
               <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">.</span>
             </div>
-          </Link>
-        </div>
+          </TiltCard>
+        </motion.div>
       </section>
 
       {/* Functional Areas of Financial Management */}
       <section className="py-50 bg-stone-950 border-t border-white/5 relative overflow-hidden flex flex-col items-center justify-center">
-        <div className="z-10 mb-20 text-center px-6">
+        <motion.div 
+          className="z-10 mb-20 text-center px-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <div className="flex items-center justify-center gap-4 mb-6">
             <span className="font-label text-xs tracking-[0.4em] text-primary uppercase">Fin-Ecosystem</span>
           </div>
@@ -195,9 +318,15 @@ export default function Home() {
           <p className="font-body text-outline mt-4 max-w-2xl mx-auto">
             Financial management is the backbone of any organization, ensuring that financial resources are used efficiently to achieve business goals. It generally divides into several key functional areas, ranging from long-term planning to daily operations
           </p>
-        </div>
+        </motion.div>
 
-        <div className="w-full relative flex h-[600px] max-w-4xl flex-col items-center justify-center space-y-6 px-4">
+        <motion.div 
+          className="w-full relative flex h-[600px] max-w-4xl flex-col items-center justify-center space-y-6 px-4"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+        >
           {/* Row 1 */}
           <div className="mx-auto w-full max-w-2xl">
             <div className="flex w-full items-center justify-center space-x-10 md:justify-between md:space-x-0">
@@ -238,7 +367,7 @@ export default function Home() {
           </div>
 
           <Radar className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 scale-150" />
-        </div>
+        </motion.div>
       </section>
 
       {/* CTA Section */}
@@ -250,7 +379,13 @@ export default function Home() {
           <FloatingPaths position={-1} />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto">
+        <motion.div 
+          className="relative z-10 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
           <h2 className="font-headline text-6xl md:text-8xl mb-16 letter-spacing-cinematic leading-tight">READY TO MASTER FINANCE.</h2>
           <p className="font-body text-outline max-w-xl mx-auto mb-20 text-xl leading-relaxed">
             Start your journey through interactive learning, powerful calculators, and real-world financial problems.
@@ -262,7 +397,7 @@ export default function Home() {
               </button>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </section>
     </main>
   );

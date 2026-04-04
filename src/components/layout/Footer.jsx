@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
+import { ArrowUpRight } from 'lucide-react';
 import { FlickeringGrid } from '../ui/flickering-grid';
 
 export function useMediaQuery(query) {
@@ -14,7 +15,7 @@ export function useMediaQuery(query) {
 
     checkQuery();
     window.addEventListener('resize', checkQuery);
-    
+
     const mediaQuery = window.matchMedia(query);
     mediaQuery.addEventListener('change', checkQuery);
 
@@ -58,13 +59,22 @@ export default function Footer() {
           {/* Left Side */}
           <div className="flex flex-col items-start justify-start gap-y-5 max-w-sm mx-0">
             <Link to="/" className="flex items-center gap-2">
-              <div className="text-2xl font-bold tracking-[0.2em] text-orange-200 font-headline uppercase">FINANCE HUB</div>
+              <div className="text-2xl font-bold tracking-[0.2em] text-orange-200 font-headline uppercase">Finagement</div>
             </Link>
             <p className="tracking-widest text-outline font-medium text-sm leading-relaxed font-body">
               Master financial management through interactive tools, visual learning, and real-world problem solving.
             </p>
+            <a
+              href="https://financial-statement-analyser.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 flex items-center justify-center gap-3 px-6 py-4 border border-primary/30 text-primary font-label font-bold text-xs tracking-[0.2em] hover:bg-surface-container-high hover:border-primary/60 transition-all duration-500 rounded-none uppercase group"
+            >
+              FINANCIAL STATEMENT ANALYSIS
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </a>
           </div>
-          
+
           {/* Right Side */}
           <div className="pt-24 md:pt-0 md:w-[60%] lg:w-1/2">
             <div className="flex flex-col items-start justify-start sm:flex-row sm:items-start sm:justify-between gap-y-16 lg:pl-10">
@@ -89,7 +99,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        
+
         {/* Footer Bottom Bar */}
         <div className="px-10 md:px-16 lg:px-24 relative z-20">
           <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] font-label text-outline/30 tracking-[0.3em] uppercase">
@@ -104,7 +114,7 @@ export default function Footer() {
         <div className="absolute inset-0 bg-gradient-to-t from-transparent to-stone-950 z-10 from-20% md:from-40%" />
         <div className="absolute inset-0 mx-0 overflow-hidden">
           <FlickeringGrid
-            text={mobile ? "FINANCE" : tablet ? "FINANCE HUB" : "FINANCE HUB"}
+            text={mobile ? "FINANCE" : tablet ? "Finagement" : "Finagement"}
             fontSize={mobile ? 80 : tablet ? 150 : 220}
             fontWeight="bold"
             className="h-full w-full opacity-70"
