@@ -8,7 +8,7 @@ export default function Navbar() {
     <>
       <nav className="fixed top-0 w-full z-50 bg-[#0a0a0a]/50 backdrop-blur-lg border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex justify-between items-center px-10 md:px-16 py-8">
         <div className="text-xl font-bold tracking-tighter text-orange-200 font-headline">
-          Finagement
+          <Link to="/">Finagement</Link>
         </div>
         <div className="hidden md:flex items-center space-x-16">
           <Link className="text-orange-200 font-bold font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300" to="/">HOME</Link>
@@ -42,9 +42,8 @@ export default function Navbar() {
           <Link onClick={() => setIsOpen(false)} className="text-orange-200 font-bold font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/">HOME</Link>
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/about">ABOUT</Link>
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/modules">MODULES</Link>
-          <Link onClick={() => setIsOpen(false)} to="/modules/tvm">
-            <button className="font-label text-xs tracking-widest text-orange-200 hover:text-orange-100 transition-colors duration-300 font-bold mt-2">LEARN</button>
-          </Link>
+          <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/modules/tvm">LEARN</Link>
+          <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to='/study-materials'>STUDY MATERIALS</Link>
         </div>
       )}
     </>
