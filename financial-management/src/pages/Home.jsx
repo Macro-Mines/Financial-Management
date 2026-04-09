@@ -7,6 +7,8 @@ import {
 } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import React, { useEffect } from 'react';
+import RandomLetterSwapForward from "../components/fancy/text/random-letter-swap-forward-anim";
+import RandomLetterSwapPingPong from "../components/fancy/text/random-letter-swap-pingpong-anim";
 
 const TiltCard = ({ children, to }) => {
   const x = useMotionValue(0);
@@ -104,9 +106,27 @@ export default function Home() {
             <motion.div variants={itemVars} className="mb-10">
               <span className="font-label text-sm tracking-[0.4em] text-primary uppercase">FINANCIAL MANAGEMENT</span>
             </motion.div>
-            <h1 className="font-headline text-6xl md:text-8xl lg:text-9xl leading-[0.9] text-on-surface letter-spacing-cinematic mb-16 overflow-hidden flex flex-col">
-              <motion.span variants={itemVars} className="block pb-2">CONTROL CAPITAL.</motion.span>
-              <motion.span variants={itemVars} className="italic text-primary-container block">SHAPE THE FUTURE.</motion.span>
+            <h1 className="font-headline text-4xl sm:text-6xl md:text-8xl lg:text-7xl leading-none text-on-surface letter-spacing-cinematic mb-16 overflow-hidden flex flex-col items-start gap-y-2 md:gap-y-0">
+              <motion.div variants={itemVars} className="flex flex-col md:flex-row md:items-baseline md:gap-x-4">
+                <RandomLetterSwapForward
+                  label="CONTROL"
+                  className="!justify-start"
+                />
+                <RandomLetterSwapForward
+                  label="CAPITAL."
+                  className="!justify-start"
+                />
+              </motion.div>
+              <motion.div variants={itemVars} className="italic text-primary-container flex flex-col md:flex-row md:gap-x-4">
+                <RandomLetterSwapPingPong
+                  label="SHAPE THE"
+                  className="!justify-start"
+                />
+                <RandomLetterSwapPingPong
+                  label="FUTURE."
+                  className="!justify-start"
+                />
+              </motion.div>
             </h1>
             <motion.div variants={itemVars} className="flex flex-col sm:flex-row items-start gap-6 sm:gap-10">
               <Link to="/modules/tvm" className="w-[280px] sm:w-[300px] block">
@@ -170,7 +190,7 @@ export default function Home() {
           </div>
           <h2 className="font-headline text-5xl md:text-6xl mb-10">Core Modules</h2>
           <p className="font-body text-outline max-w-2xl text-lg leading-relaxed">
-            Five comprehensive modules designed to take you from fundamentals to advanced financial decision-making, delivered through a brutalist architectural lens.
+            Six comprehensive modules designed to take you from fundamentals to advanced financial decision-making, delivered through a brutalist architectural lens.
           </p>
         </motion.div>
 
@@ -281,22 +301,22 @@ export default function Home() {
             </div>
           </TiltCard>
 
-          {/* 06 Upcoming Module */}
-          <TiltCard to="/modules/upcoming">
+          {/* 06 Dividend Decisions */}
+          <TiltCard to="/modules/dividend-decisions">
             <div>
               <div className="flex justify-between items-start mb-12">
-                <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">add_chart</span>
+                <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">payments</span>
                 <span className="font-label text-3xl text-outline/30 tracking-widest">06</span>
               </div>
-              <h3 className="font-headline text-3xl mb-6">Upcoming Module</h3>
+              <h3 className="font-headline text-3xl mb-6">Dividend Decisions</h3>
               <p className="font-body text-sm text-outline leading-relaxed mb-10">
-                Coming Soon...
+                Explore theories on how profit distribution affects firm value — from Walter to Gordon.
               </p>
             </div>
             <div className="flex flex-wrap gap-4 font-label text-[10px] text-outline/40 uppercase tracking-[0.2em]">
-              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">.</span>
-              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">.</span>
-              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">.</span>
+              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Walter Model</span>
+              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Gordon Model</span>
+              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Case Study</span>
             </div>
           </TiltCard>
         </motion.div>
@@ -371,7 +391,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-64 px-10 md:px-16 lg:px-24 text-center bg-stone-950 relative overflow-hidden">
+      <section className="py-48 px-10 md:px-16 lg:px-24 text-center bg-stone-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-primary/5 opacity-20 pointer-events-none"></div>
 
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -386,7 +406,14 @@ export default function Home() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <h2 className="font-headline text-6xl md:text-8xl mb-16 letter-spacing-cinematic leading-tight">READY TO MASTER FINANCE.</h2>
+          <h2 className="font-headline text-4xl md:text-6xl sm:text-4xl lg:text-7xl mb-16 letter-spacing-cinematic leading-tight">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            >READY TO MASTER FINANCE.</motion.div>
+          </h2>
           <p className="font-body text-outline max-w-xl mx-auto mb-20 text-xl leading-relaxed">
             Start your journey through interactive learning, powerful calculators, and real-world financial problems.
           </p>

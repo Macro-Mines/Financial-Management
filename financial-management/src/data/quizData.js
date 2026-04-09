@@ -259,6 +259,43 @@ const quizData = {
       correct: 2,
       explanation: 'The simple Payback Period method does not discount future cash flows, hence it ignores the time value of money.'
     }
+  ],
+  dividendDecisions: [
+    {
+      id: 'dd-1',
+      question: 'Which model uses the formula P = [D + (r/k)(E-D)] / k?',
+      options: ['Gordon Model', 'Walter Model', 'MM Approach', 'Traditional Approach'],
+      correct: 1,
+      explanation: 'The Walter Model is represented by this formula, highlighting the relationship between return (r) and cost of capital (k).'
+    },
+    {
+      id: 'dd-2',
+      question: 'If r > k, what is the optimal dividend policy according to Walter\'s Model?',
+      options: ['100% Payout', '50% Payout', '0% Payout (100% Retention)', 'Dividend policy is irrelevant'],
+      correct: 2,
+      explanation: 'When return (r) is greater than cost of capital (k), the firm is a growth firm and should retain all earnings to maximize share price.'
+    },
+    {
+      id: 'dd-3',
+      question: 'According to Walter\'s model, if r = k, the dividend policy:',
+      options: ['Should be 100% payout', 'Should be 0% payout', 'Is irrelevant', 'Should be 50% payout'],
+      correct: 2,
+      explanation: 'When r = k, the market price of the share remains constant regardless of the dividend payout ratio.'
+    },
+    {
+      id: 'dd-4',
+      question: 'Which of the following is a form of non-cash dividend?',
+      options: ['Interim Dividend', 'Stock Dividend (Bonus Shares)', 'Cash Dividend', 'Final Dividend'],
+      correct: 1,
+      explanation: 'Stock dividends or bonus shares are issued to existing shareholders without any cash outflow from the company.'
+    },
+    {
+      id: 'dd-5',
+      question: 'If r < k, the firm is considered a __________ firm.',
+      options: ['Growth', 'Constant', 'Declining', 'Efficient'],
+      correct: 2,
+      explanation: 'A declining firm has returns (r) less than the cost of capital (k). For such firms, paying out dividends is better than reinvesting.'
+    }
   ]
 };
 

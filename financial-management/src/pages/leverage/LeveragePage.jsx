@@ -142,7 +142,7 @@ export default function LeveragePage() {
         </div>
         <p className="text-dune-300 mb-8 max-w-2xl">How fixed costs amplify the impact of changes in sales on a firm's earnings — operating, financial, and combined leverage.</p>
 
-        <div className="flex gap-1 mb-8 p-1 bg-dune-800/50 rounded-xl w-fit flex-wrap">
+        <div id="calculator-section" style={{ scrollMarginTop: '120px' }} className="flex gap-1 mb-8 p-1 bg-dune-800/50 rounded-xl w-fit flex-wrap">
           {tabs.map((tab) => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-gold/20 text-gold' : 'text-dune-300 hover:text-sand-200'}`}>
               {tab.label}
@@ -202,9 +202,33 @@ export default function LeveragePage() {
             <div className="glass-card p-6 text-center">
               <p className="text-dune-300 mb-4">Explore the interactive EBIT-EPS chart or test your knowledge.</p>
               <div className="flex gap-3 justify-center flex-wrap">
-                <button onClick={() => setActiveTab('calculator')} className="btn-primary !py-2.5 !px-6 !text-xs">Try Calculator</button>
-                <button onClick={() => setActiveTab('ebit-eps')} className="btn-secondary !py-2.5 !px-6 !text-xs">EBIT-EPS Chart</button>
-                <button onClick={() => setActiveTab('quiz')} className="btn-secondary !py-2.5 !px-6 !text-xs">Take Quiz</button>
+                <button 
+                  onClick={() => {
+                    setActiveTab('calculator');
+                    document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  className="btn-primary !py-2.5 !px-6 !text-xs"
+                >
+                  Try Calculator
+                </button>
+                <button 
+                  onClick={() => {
+                    setActiveTab('ebit-eps');
+                    document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  className="btn-secondary !py-2.5 !px-6 !text-xs"
+                >
+                  EBIT-EPS Chart
+                </button>
+                <button 
+                  onClick={() => {
+                    setActiveTab('quiz');
+                    document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  className="btn-secondary !py-2.5 !px-6 !text-xs"
+                >
+                  Take Quiz
+                </button>
               </div>
             </div>
           </motion.div>

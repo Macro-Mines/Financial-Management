@@ -41,6 +41,7 @@ export default function Footer() {
         { id: 3, title: 'LEVERAGE', url: '/modules/leverage' },
         { id: 4, title: 'CAPITAL STRUCTURE', url: '/modules/capital-structure' },
         { id: 5, title: 'CAPITAL BUDGETING', url: '/modules/capital-budgeting' },
+        { id: 11, title: 'DIVIDEND DECISIONS', url: '/modules/dividend-decisions' },
       ],
     },
     {

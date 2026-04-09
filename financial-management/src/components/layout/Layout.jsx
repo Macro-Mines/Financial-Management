@@ -15,7 +15,7 @@ export default function Layout() {
 
       <div className="relative z-10 min-h-screen flex flex-col">
         <Navbar />
-        <main className="grow flex flex-col relative">
+        <main className="grow flex flex-col relative overflow-x-clip">
           <Outlet />
         </main>
         <Footer />
