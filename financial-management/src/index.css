@@ -105,16 +105,35 @@ body {
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-dune-800);
+  background: rgba(10, 10, 10, 0.5);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-sand-700);
+  background: var(--color-sand-300);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-gold);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(243, 213, 166, 0.2);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(243, 213, 166, 0.4);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* ===== SELECTION ===== */
@@ -341,10 +360,13 @@ a:hover {
 
 /* Page Container */
 .page-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 120px 24px 80px;
   min-height: 100vh;
+  position: relative;
+  overflow-x: clip; /* Prevent accidental horizontal bleeds */
 }
 
 /* Concept Section */

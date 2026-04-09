@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const modules = [
   {
     number: '01', 
-    total: '05',
+    total: '06',
     title: 'Time Value of Money', 
     path: '/modules/tvm', 
     icon: 'hourglass_empty',
@@ -18,7 +18,7 @@ const modules = [
   },
   {
     number: '02', 
-    total: '05',
+    total: '06',
     title: 'Cost of Capital', 
     path: '/modules/cost-of-capital', 
     icon: 'monetization_on',
@@ -32,7 +32,7 @@ const modules = [
   },
   {
     number: '03', 
-    total: '05',
+    total: '06',
     title: 'Leverage', 
     path: '/modules/leverage', 
     icon: 'balance',
@@ -45,7 +45,7 @@ const modules = [
   },
   {
     number: '04', 
-    total: '05',
+    total: '06',
     title: 'Capital Structure', 
     path: '/modules/capital-structure', 
     icon: 'account_tree',
@@ -55,7 +55,7 @@ const modules = [
   },
   {
     number: '05', 
-    total: '05',
+    total: '06',
     title: 'Capital Budgeting', 
     path: '/modules/capital-budgeting', 
     icon: 'assessment',
@@ -65,6 +65,19 @@ const modules = [
       { name: 'NPV Calculator', icon: 'data_exploration' },
       { name: 'IRR Calculator', icon: 'data_exploration' },
       { name: 'Payback Calculator', icon: 'data_exploration' }
+    ],
+  },
+  {
+    number: '06', 
+    total: '06',
+    title: 'Dividend Decisions', 
+    path: '/modules/dividend-decisions', 
+    icon: 'payments',
+    desc: 'Explore Walter and Gordon models to understand how dividend policy impacts share price.',
+    topics: ['Walter Model', 'Gordon Model', 'Stable Policy', 'Case Study'],
+    calculators: [
+      { name: 'Walter Model Solver', icon: 'calculate' },
+      { name: 'Scenario Analysis', icon: 'analytics' }
     ],
   },
 ];
@@ -88,7 +101,7 @@ export default function Modules() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="md:col-span-7">
             <p className="text-xl md:text-2xl font-light leading-relaxed text-on-surface-variant font-body">
-              Five comprehensive modules covering the core pillars of financial management. Each module includes concept explanations, interactive calculators, and practice quizzes.
+              Six comprehensive modules covering the core pillars of financial management. Each module includes concept explanations, interactive calculators, and practice quizzes.
             </p>
           </div>
         </div>

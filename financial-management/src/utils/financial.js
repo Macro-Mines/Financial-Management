@@ -165,6 +165,30 @@ export function profitabilityIndex(initialInvestment, cashFlows, discountRate) {
   return pvCashFlows / initialInvestment;
 }
 
+// ---------- DIVIDEND DECISIONS ----------
+
+export function walterModel(d, e, r, k) {
+  const rDec = r / 100;
+  const kDec = k / 100;
+  if (kDec === 0) return null;
+  return (d + (rDec / kDec) * (e - d)) / kDec;
+}
+
+export function getWalterComparison(e, k, rGrowth, rConstant, rDeclining) {
+  const payoutRatios = [0, 10, 20, 50, 70, 90, 100];
+  
+  return payoutRatios.map(payout => {
+    const d = (payout / 100) * e;
+    return {
+      payout,
+      dividend: d,
+      growth: walterModel(d, e, rGrowth, k),
+      constant: walterModel(d, e, rConstant, k),
+      declining: walterModel(d, e, rDeclining, k)
+    };
+  });
+}
+
 // ---------- FORMATTERS ----------
 
 export function formatCurrency(value, currency = '₹') {

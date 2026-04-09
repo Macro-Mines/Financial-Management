@@ -190,7 +190,7 @@ export default function Home() {
           </div>
           <h2 className="font-headline text-5xl md:text-6xl mb-10">Core Modules</h2>
           <p className="font-body text-outline max-w-2xl text-lg leading-relaxed">
-            Five comprehensive modules designed to take you from fundamentals to advanced financial decision-making, delivered through a brutalist architectural lens.
+            Six comprehensive modules designed to take you from fundamentals to advanced financial decision-making, delivered through a brutalist architectural lens.
           </p>
         </motion.div>
 
@@ -301,22 +301,22 @@ export default function Home() {
             </div>
           </TiltCard>
 
-          {/* 06 Upcoming Module */}
-          <TiltCard to="/modules/upcoming">
+          {/* 06 Dividend Decisions */}
+          <TiltCard to="/modules/dividend-decisions">
             <div>
               <div className="flex justify-between items-start mb-12">
-                <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">add_chart</span>
+                <span className="material-symbols-outlined !text-3xl text-primary/40 group-hover:text-primary transition-colors">payments</span>
                 <span className="font-label text-3xl text-outline/30 tracking-widest">06</span>
               </div>
-              <h3 className="font-headline text-3xl mb-6">Upcoming Module</h3>
+              <h3 className="font-headline text-3xl mb-6">Dividend Decisions</h3>
               <p className="font-body text-sm text-outline leading-relaxed mb-10">
-                Coming Soon...
+                Explore theories on how profit distribution affects firm value — from Walter to Gordon.
               </p>
             </div>
             <div className="flex flex-wrap gap-4 font-label text-[10px] text-outline/40 uppercase tracking-[0.2em]">
-              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">.</span>
-              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">.</span>
-              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">.</span>
+              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Walter Model</span>
+              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Gordon Model</span>
+              <span className="border border-white/10 px-3 py-1 hover:border-primary/50 hover:text-primary transition-colors duration-300">Case Study</span>
             </div>
           </TiltCard>
         </motion.div>
