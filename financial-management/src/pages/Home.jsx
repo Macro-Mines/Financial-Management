@@ -106,7 +106,7 @@ export default function Home() {
             <motion.div variants={itemVars} className="mb-10">
               <span className="font-label text-sm tracking-[0.4em] text-primary uppercase">FINANCIAL MANAGEMENT</span>
             </motion.div>
-            <h1 className="font-headline text-5xl sm:text-6xl md:text-8xl lg:text-7xl leading-none text-on-surface letter-spacing-cinematic mb-16 overflow-hidden flex flex-col items-start gap-y-2 md:gap-y-0">
+            <h1 className="font-headline text-4xl sm:text-6xl md:text-8xl lg:text-7xl leading-none text-on-surface letter-spacing-cinematic mb-16 overflow-hidden flex flex-col items-start gap-y-2 md:gap-y-0">
               <motion.div variants={itemVars} className="flex flex-col md:flex-row md:items-baseline md:gap-x-4">
                 <RandomLetterSwapForward
                   label="CONTROL"
@@ -406,7 +406,7 @@ export default function Home() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <h2 className="font-headline text-6xl md:text-7xl mb-16 letter-spacing-cinematic leading-tight">
+          <h2 className="font-headline text-4xl md:text-6xl sm:text-4xl lg:text-7xl mb-16 letter-spacing-cinematic leading-tight">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
