@@ -88,16 +88,15 @@ export default function TVMPage() {
         </p>
 
         {/* Tabs */}
-        <div className="flex gap-1 mb-8 p-1 bg-dune-800/50 rounded-xl w-fit">
+        <div id="calculator-section" style={{ scrollMarginTop: '120px' }} className="flex gap-1 mb-8 p-1 bg-dune-800/50 rounded-xl w-fit">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                activeTab === tab.id
-                  ? 'bg-gold/20 text-gold'
-                  : 'text-dune-300 hover:text-sand-200'
-              }`}
+              className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
+                ? 'bg-gold/20 text-gold'
+                : 'text-dune-300 hover:text-sand-200'
+                }`}
             >
               {tab.label}
             </button>
@@ -207,8 +206,24 @@ export default function TVMPage() {
             <div className="glass-card p-6 text-center">
               <p className="text-dune-300 mb-4">Ready to practice? Try the calculator or test your knowledge.</p>
               <div className="flex gap-3 justify-center">
-                <button onClick={() => setActiveTab('calculator')} className="btn-primary !py-2.5 !px-6 !text-xs">Try Calculator</button>
-                <button onClick={() => setActiveTab('quiz')} className="btn-secondary !py-2.5 !px-6 !text-xs">Take Quiz</button>
+                <button
+                  onClick={() => {
+                    setActiveTab('calculator');
+                    document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="btn-primary !py-2.5 !px-6 !text-xs"
+                >
+                  Try Calculator
+                </button>
+                <button
+                  onClick={() => {
+                    setActiveTab('quiz');
+                    document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="btn-secondary !py-2.5 !px-6 !text-xs"
+                >
+                  Take Quiz
+                </button>
               </div>
             </div>
           </motion.div>
@@ -226,9 +241,8 @@ export default function TVMPage() {
                 <button
                   key={ct.id}
                   onClick={() => setCalcType(ct.id)}
-                  className={`px-5 py-2 rounded-lg text-sm transition-all ${
-                    calcType === ct.id ? 'bg-gold/20 text-gold' : 'text-dune-300 hover:text-sand-200'
-                  }`}
+                  className={`px-5 py-2 rounded-lg text-sm transition-all ${calcType === ct.id ? 'bg-gold/20 text-gold' : 'text-dune-300 hover:text-sand-200'
+                    }`}
                 >
                   {ct.label}
                 </button>
@@ -268,17 +282,15 @@ export default function TVMPage() {
                 <div className="flex gap-3 mb-4">
                   <button
                     onClick={() => setAnnType('pv')}
-                    className={`px-4 py-2 rounded-lg text-xs border transition-all ${
-                      annType === 'pv' ? 'border-gold text-gold bg-gold/10' : 'border-sand-800/20 text-dune-400'
-                    }`}
+                    className={`px-4 py-2 rounded-lg text-xs border transition-all ${annType === 'pv' ? 'border-gold text-gold bg-gold/10' : 'border-sand-800/20 text-dune-400'
+                      }`}
                   >
                     PV of Annuity
                   </button>
                   <button
                     onClick={() => setAnnType('fv')}
-                    className={`px-4 py-2 rounded-lg text-xs border transition-all ${
-                      annType === 'fv' ? 'border-gold text-gold bg-gold/10' : 'border-sand-800/20 text-dune-400'
-                    }`}
+                    className={`px-4 py-2 rounded-lg text-xs border transition-all ${annType === 'fv' ? 'border-gold text-gold bg-gold/10' : 'border-sand-800/20 text-dune-400'
+                      }`}
                   >
                     FV of Annuity
                   </button>

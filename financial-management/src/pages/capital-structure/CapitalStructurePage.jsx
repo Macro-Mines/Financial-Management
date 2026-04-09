@@ -30,7 +30,7 @@ export default function CapitalStructurePage() {
         </div>
         <p className="text-dune-300 mb-8 max-w-2xl">Theories on the optimal mix of debt and equity financing that minimizes cost and maximizes firm value.</p>
 
-        <div className="flex gap-1 mb-8 p-1 bg-dune-800/50 rounded-xl w-fit">
+        <div id="calculator-section" style={{ scrollMarginTop: '120px' }} className="flex gap-1 mb-8 p-1 bg-dune-800/50 rounded-xl w-fit">
           {tabs.map((tab) => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-gold/20 text-gold' : 'text-dune-300 hover:text-sand-200'}`}>
               {tab.label}
@@ -120,8 +120,24 @@ export default function CapitalStructurePage() {
             <div className="glass-card p-6 text-center">
               <p className="text-dune-300 mb-4">Compare all three theories side by side or take the quiz.</p>
               <div className="flex gap-3 justify-center">
-                <button onClick={() => setActiveTab('comparison')} className="btn-primary !py-2.5 !px-6 !text-xs">Comparison Table</button>
-                <button onClick={() => setActiveTab('quiz')} className="btn-secondary !py-2.5 !px-6 !text-xs">Take Quiz</button>
+                <button 
+                  onClick={() => {
+                    setActiveTab('comparison');
+                    document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  className="btn-primary !py-2.5 !px-6 !text-xs"
+                >
+                  Comparison Table
+                </button>
+                <button 
+                  onClick={() => {
+                    setActiveTab('quiz');
+                    document.getElementById('calculator-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }} 
+                  className="btn-secondary !py-2.5 !px-6 !text-xs"
+                >
+                  Take Quiz
+                </button>
               </div>
             </div>
           </motion.div>

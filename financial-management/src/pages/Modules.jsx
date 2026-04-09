@@ -82,7 +82,7 @@ export default function Modules() {
         <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-primary-container mb-4">
           LEARNING PATH
         </p>
-        <h1 className="text-6xl md:text-8xl font-headline font-bold tracking-tight text-primary leading-none mb-8">
+        <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-primary leading-none mb-8">
           All Modules
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">

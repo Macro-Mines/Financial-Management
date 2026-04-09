@@ -7,6 +7,8 @@ import {
 } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import React, { useEffect } from 'react';
+import RandomLetterSwapForward from "../components/fancy/text/random-letter-swap-forward-anim";
+import RandomLetterSwapPingPong from "../components/fancy/text/random-letter-swap-pingpong-anim";
 
 const TiltCard = ({ children, to }) => {
   const x = useMotionValue(0);
@@ -104,9 +106,27 @@ export default function Home() {
             <motion.div variants={itemVars} className="mb-10">
               <span className="font-label text-sm tracking-[0.4em] text-primary uppercase">FINANCIAL MANAGEMENT</span>
             </motion.div>
-            <h1 className="font-headline text-6xl md:text-8xl lg:text-9xl leading-[0.9] text-on-surface letter-spacing-cinematic mb-16 overflow-hidden flex flex-col">
-              <motion.span variants={itemVars} className="block pb-2">CONTROL CAPITAL.</motion.span>
-              <motion.span variants={itemVars} className="italic text-primary-container block">SHAPE THE FUTURE.</motion.span>
+            <h1 className="font-headline text-5xl sm:text-6xl md:text-8xl lg:text-7xl leading-none text-on-surface letter-spacing-cinematic mb-16 overflow-hidden flex flex-col items-start gap-y-2 md:gap-y-0">
+              <motion.div variants={itemVars} className="flex flex-col md:flex-row md:items-baseline md:gap-x-4">
+                <RandomLetterSwapForward
+                  label="CONTROL"
+                  className="!justify-start"
+                />
+                <RandomLetterSwapForward
+                  label="CAPITAL."
+                  className="!justify-start"
+                />
+              </motion.div>
+              <motion.div variants={itemVars} className="italic text-primary-container flex flex-col md:flex-row md:gap-x-4">
+                <RandomLetterSwapPingPong
+                  label="SHAPE THE"
+                  className="!justify-start"
+                />
+                <RandomLetterSwapPingPong
+                  label="FUTURE."
+                  className="!justify-start"
+                />
+              </motion.div>
             </h1>
             <motion.div variants={itemVars} className="flex flex-col sm:flex-row items-start gap-6 sm:gap-10">
               <Link to="/modules/tvm" className="w-[280px] sm:w-[300px] block">
@@ -371,7 +391,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-64 px-10 md:px-16 lg:px-24 text-center bg-stone-950 relative overflow-hidden">
+      <section className="py-48 px-10 md:px-16 lg:px-24 text-center bg-stone-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-primary/5 opacity-20 pointer-events-none"></div>
 
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -386,7 +406,14 @@ export default function Home() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <h2 className="font-headline text-6xl md:text-8xl mb-16 letter-spacing-cinematic leading-tight">READY TO MASTER FINANCE.</h2>
+          <h2 className="font-headline text-6xl md:text-7xl mb-16 letter-spacing-cinematic leading-tight">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            >READY TO MASTER FINANCE.</motion.div>
+          </h2>
           <p className="font-body text-outline max-w-xl mx-auto mb-20 text-xl leading-relaxed">
             Start your journey through interactive learning, powerful calculators, and real-world financial problems.
           </p>
