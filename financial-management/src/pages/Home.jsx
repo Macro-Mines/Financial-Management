@@ -10,6 +10,7 @@ import React, { useEffect } from 'react';
 import RandomLetterSwapForward from "../components/fancy/text/random-letter-swap-forward-anim";
 import RandomLetterSwapPingPong from "../components/fancy/text/random-letter-swap-pingpong-anim";
 import SimpleMarquee from "../components/fancy/blocks/simple-marquee";
+import HomeSkeleton from "../components/home/HomeSkeleton";
 
 // Currency Assets
 import rupee10 from '../assets/curriencies/10 rupee.png';
@@ -68,6 +69,7 @@ const TiltCard = ({ children, to }) => {
 };
 
 export default function Home() {
+  const [isLoading, setIsLoading] = React.useState(true);
   const { scrollY } = useScroll();
   const yBg = useTransform(scrollY, [0, 1000], [0, 200]); // Slower parallax for background monolith
   const yStagger = useTransform(scrollY, [0, 1000], [0, 100]); // Mild parallax for hero text layer
@@ -84,7 +86,16 @@ export default function Home() {
       mouseY.set(e.clientY);
     };
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+
+    // Simulate loading for 2 seconds
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      clearTimeout(timer);
+    };
   }, [mouseX, mouseY]);
 
   // Framer Stagger Variants
@@ -100,6 +111,10 @@ export default function Home() {
     hidden: { opacity: 0, y: 50 },
     show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
   };
+
+  if (isLoading) {
+    return <HomeSkeleton />;
+  }
 
   return (
     <main className="relative z-10 flex-grow flex flex-col">

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import ModulesSkeleton from '../components/modules/ModulesSkeleton';
 
 const modules = [
   {
@@ -83,6 +85,18 @@ const modules = [
 ];
 
 export default function Modules() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (isLoading) {
+    return <ModulesSkeleton />;
+  }
+
   return (
     <main className="relative z-10 pt-32 pb-24 px-8 max-w-screen-xl mx-auto">
       {/* Header Section */}
