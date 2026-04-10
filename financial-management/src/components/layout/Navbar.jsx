@@ -14,6 +14,7 @@ export default function Navbar() {
           <Link className="text-orange-200 font-bold font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300" to="/">HOME</Link>
           <Link className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300" to="/about">ABOUT</Link>
           <Link className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300" to="/modules">MODULES</Link>
+          <Link className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300" to="/video-course">VIDEO COURSE</Link>
         </div>
         <div className="flex items-center space-x-10">
           <Link to="/modules/tvm" className="hidden md:block">
@@ -42,6 +43,7 @@ export default function Navbar() {
           <Link onClick={() => setIsOpen(false)} className="text-orange-200 font-bold font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/">HOME</Link>
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/about">ABOUT</Link>
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/modules">MODULES</Link>
+          <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/video-course">VIDEO COURSE</Link>
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/modules/tvm">LEARN</Link>
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to='/study-materials'>STUDY MATERIALS</Link>
         </div>
