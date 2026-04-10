@@ -24,8 +24,9 @@ export function annuityFV(pmt, rate, periods) {
 
 // ---------- COST OF CAPITAL ----------
 
-export function costOfDebtIrredeemable(interestRate, taxRate) {
-  return interestRate * (1 - taxRate / 100);
+export function costOfDebtIrredeemable(annualInterest, netProceeds, taxRate) {
+  if (netProceeds === 0) return 0;
+  return (annualInterest * (1 - taxRate / 100) / netProceeds) * 100;
 }
 
 export function costOfDebtRedeemable(faceValue, marketPrice, couponRate, years, taxRate) {

@@ -9,6 +9,18 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue } from "fram
 import React, { useEffect } from 'react';
 import RandomLetterSwapForward from "../components/fancy/text/random-letter-swap-forward-anim";
 import RandomLetterSwapPingPong from "../components/fancy/text/random-letter-swap-pingpong-anim";
+import SimpleMarquee from "../components/fancy/blocks/simple-marquee";
+
+// Currency Assets
+import rupee10 from '../assets/curriencies/10 rupee.png';
+import rupee50 from '../assets/curriencies/50 rupee.png';
+import rupee500 from '../assets/curriencies/500 rupee.png';
+
+const MarqueeItem = ({ children }) => (
+  <div className="mx-2 sm:mx-4 md:mx-6 hover:scale-110 transition-transform duration-500 ease-in-out">
+    {children}
+  </div>
+);
 
 const TiltCard = ({ children, to }) => {
   const x = useMotionValue(0);
@@ -173,6 +185,41 @@ export default function Home() {
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVKbIwbgK9_66TY2SEji1uEbJeVMrEhOV0VPF6ae5ci84wBY_5ZD_yhfoctXC2C99Pe9k3fIDU4ZG6LhsqRMSIgJkZva1EPbdYBQg9tOMeoNY1Z9Jfcz4GeAher-AqWwAKS7hsLLwXi6dC0tC1REZPKHYoEKN1VCJbp_89pNOPl88CNRhEzwrfGp8aHIgCp2mf7BbGgEvtnOjB70RgaAQHN5coM3ZTt-VK8U-1VOsiKIhLCRQCCKdjWlsAuDtjI3mv81EacFjJKIW_"
           />
         </motion.div>
+      </section>
+
+      {/* Marquee Section */}
+      <section className="py-32 bg-stone-950 border-t border-white/5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-primary/2 opacity-[0.02] pointer-events-none"></div>
+
+        <div className="flex flex-col space-y-4 md:space-y-8">
+          <SimpleMarquee
+            baseVelocity={4}
+            repeat={4}
+            className="py-4"
+            direction="left"
+            slowdownOnHover
+          >
+            {[rupee10, rupee50, rupee500, rupee10, rupee50, rupee500].map((src, i) => (
+              <MarqueeItem key={`row1-${i}`}>
+                <img src={src} alt="Currency" className="h-20 md:h-32 w-auto object-contain brightness-75 hover:brightness-100 transition-all duration-500 grayscale hover:grayscale-0" />
+              </MarqueeItem>
+            ))}
+          </SimpleMarquee>
+
+          <SimpleMarquee
+            baseVelocity={4}
+            repeat={4}
+            className="py-4"
+            direction="right"
+            slowdownOnHover
+          >
+            {[rupee500, rupee50, rupee10, rupee500, rupee50, rupee10].map((src, i) => (
+              <MarqueeItem key={`row2-${i}`}>
+                <img src={src} alt="Currency" className="h-20 md:h-32 w-auto object-contain brightness-75 hover:brightness-100 transition-all duration-500 grayscale hover:grayscale-0" />
+              </MarqueeItem>
+            ))}
+          </SimpleMarquee>
+        </div>
       </section>
 
       {/* Curriculum Grid Section */}
@@ -389,6 +436,7 @@ export default function Home() {
           <Radar className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 scale-150" />
         </motion.div>
       </section>
+
 
       {/* CTA Section */}
       <section className="py-48 px-10 md:px-16 lg:px-24 text-center bg-stone-950 relative overflow-hidden">

@@ -50,6 +50,7 @@ export default function Footer() {
         { id: 6, title: 'ALL MODULES', url: '/modules' },
         { id: 7, title: 'ABOUT', url: '/about' },
         { id: 8, title: 'STUDY MATERIALS', url: '/study-materials' },
+        { id: 9, title: 'VIDEO COURSE', url: '/video-course' },
       ],
     },
   ];

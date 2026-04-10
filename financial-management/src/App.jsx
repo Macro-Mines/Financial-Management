@@ -10,6 +10,7 @@ import CapitalStructurePage from './pages/capital-structure/CapitalStructurePage
 import CapitalBudgetingPage from './pages/capital-budgeting/CapitalBudgetingPage';
 import DividendDecisionsPage from './pages/dividend-decisions/DividendDecisionsPage';
 import StudyMaterials from './pages/StudyMaterials';
+import VideoCourse from './pages/VideoCourse';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/modules/capital-budgeting" element={<CapitalBudgetingPage />} />
           <Route path="/modules/dividend-decisions" element={<DividendDecisionsPage />} />
           <Route path="/study-materials" element={<StudyMaterials />} />
+          <Route path="/video-course" element={<VideoCourse />} />
         </Route>
       </Routes>
     </Router>
