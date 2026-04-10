@@ -11,10 +11,12 @@ import CapitalBudgetingPage from './pages/capital-budgeting/CapitalBudgetingPage
 import DividendDecisionsPage from './pages/dividend-decisions/DividendDecisionsPage';
 import StudyMaterials from './pages/StudyMaterials';
 import VideoCourse from './pages/VideoCourse';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />

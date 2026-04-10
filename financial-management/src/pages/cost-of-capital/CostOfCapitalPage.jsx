@@ -6,6 +6,15 @@ import CalculatorLayout from '../../components/ui/CalculatorLayout';
 import Quiz from '../../components/ui/Quiz';
 import { costOfDebtIrredeemable, costOfDebtRedeemable, costOfPreferenceShares, costOfEquityDividendModel, costOfEquityCAPM, costOfRetainedEarnings, wacc, formatPercent, formatCurrency } from '../../utils/financial';
 import quizData from '../../data/quizData';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationList,
+  PaginationNext,
+  PaginationPrevious,
+} from '../../components/ui/pagination';
 
 export default function CostOfCapitalPage() {
   const [activeTab, setActiveTab] = useState('learn');
@@ -388,11 +397,43 @@ export default function CostOfCapitalPage() {
           </motion.div>
         )}
 
+        {/* Quiz Tab */}
         {activeTab === 'quiz' && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <Quiz questions={quizData.costOfCapital} moduleTitle="Cost of Capital" />
           </motion.div>
         )}
+
+        {/* Module Pagination */}
+        <div className="mt-20 pt-10 border-t border-outline-variant/10">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious to="/modules/tvm" />
+              </PaginationItem>
+
+              <PaginationList>
+                {[1, 2, 3, 4, 5, 6].map((num) => (
+                  <PaginationItem key={num}>
+                    <PaginationLink 
+                      to={num === 1 ? "/modules/tvm" : num === 2 ? "/modules/cost-of-capital" : num === 3 ? "/modules/leverage" : num === 4 ? "/modules/capital-structure" : num === 5 ? "/modules/capital-budgeting" : "/modules/dividend-decisions"} 
+                      isActive={num === 2}
+                    >
+                      {num}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+              </PaginationList>
+
+              <PaginationItem>
+                <PaginationNext to="/modules/leverage" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+          <p className="text-center text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/40 mt-4 font-mono">
+            Next Module: Leverage
+          </p>
+        </div>
       </motion.div>
     </div>
   );

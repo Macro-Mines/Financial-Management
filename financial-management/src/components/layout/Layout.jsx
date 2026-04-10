@@ -4,10 +4,6 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 export default function Layout() {
-  const { pathname } = useLocation();
-
-  useEffect(() => window.scrollTo(0, 0), [pathname]);
-
   return (
     <>
       <div className="fixed inset-0 grainy-overlay z-0" />
