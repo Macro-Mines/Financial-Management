@@ -6,6 +6,15 @@ import CalculatorLayout from '../../components/ui/CalculatorLayout';
 import Quiz from '../../components/ui/Quiz';
 import { futureValue, presentValue, annuityPV, annuityFV, formatCurrency } from '../../utils/financial';
 import quizData from '../../data/quizData';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationList,
+  PaginationNext,
+  PaginationPrevious,
+} from '../../components/ui/pagination';
 
 export default function TVMPage() {
   const [activeTab, setActiveTab] = useState('learn');
@@ -317,6 +326,37 @@ export default function TVMPage() {
             <Quiz questions={quizData.tvm} moduleTitle="Time Value of Money" />
           </motion.div>
         )}
+
+        {/* Module Pagination */}
+        <div className="mt-20 pt-10 border-t border-outline-variant/10">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious to="/modules" />
+              </PaginationItem>
+              
+              <PaginationList>
+                {[1, 2, 3, 4, 5, 6].map((num) => (
+                  <PaginationItem key={num}>
+                    <PaginationLink 
+                      to={num === 1 ? "/modules/tvm" : num === 2 ? "/modules/cost-of-capital" : num === 3 ? "/modules/leverage" : num === 4 ? "/modules/capital-structure" : num === 5 ? "/modules/capital-budgeting" : "/modules/dividend-decisions"} 
+                      isActive={num === 1}
+                    >
+                      {num}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+              </PaginationList>
+
+              <PaginationItem>
+                <PaginationNext to="/modules/cost-of-capital" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+          <p className="text-center text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/40 mt-4 font-mono">
+            Next Module: Cost of Capital
+          </p>
+        </div>
       </motion.div>
     </div>
   );
