@@ -44,7 +44,6 @@ export default function Navbar() {
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/about">ABOUT</Link>
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/modules">MODULES</Link>
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/video-course">VIDEO COURSE</Link>
-          <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to="/modules/tvm">LEARN</Link>
           <Link onClick={() => setIsOpen(false)} className="text-stone-500 font-medium font-label text-xs tracking-widest hover:text-orange-100 transition-colors duration-300 uppercase" to='/study-materials'>STUDY MATERIALS</Link>
         </div>
       )}
